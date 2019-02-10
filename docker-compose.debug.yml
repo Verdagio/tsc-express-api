@@ -1,0 +1,13 @@
+version: "3"
+
+services:
+  tsc-express-api:
+    build: 
+      context: ./
+      dockerfile: Dockerfile-debug
+    user: "node"
+    working_dir: /home/node/app
+    volumes:
+      - .:/home/node/app
+    ports:
+      - "9000:5000"
