@@ -4,6 +4,7 @@ import * as cors from 'cors';
 import * as jwt from 'express-jwt';
 import * as jwks from 'jwks-rsa';
 import * as config from 'config';
+import * as mongoose from 'mongoose';
 
 import { Router } from '../routes/router'
 
@@ -28,12 +29,21 @@ class App {
         this.app = express();
         this.conf();
         this.router.routes(this.app);
+        this.dbConnect();
     }
 
     private conf(): void {
         this.app.use(bodyParser.json());
         this.app.use(bodyParser.urlencoded({extended: false}));
         this.app.use(cors());
+    }
+
+    private dbConnect(): void{
+        mongoose.connect('mongodb://localhost/sampledb', { useNewUrlParser: true });
+        const connectionStatus = mongoose.connection;
+        connectionStatus.on('connected', ()=>{
+            console.log('successful connection to mongodb');
+        });
     }
 }
 export default new App().app;
