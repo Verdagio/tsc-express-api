@@ -5,6 +5,8 @@ import * as jwt from 'express-jwt';
 import * as jwks from 'jwks-rsa';
 import * as config from 'config';
 
+import { Router } from '../routes/router'
+
 
 class App {
 
@@ -19,11 +21,13 @@ class App {
         audience: config.get('Secret.audience'),
         issuer: config.get('Secret.domain'),
         algorithms: config.get('Secret.algorithms')
-    })
+    });
+    public router : Router = new Router();
 
     constructor(){
         this.app = express();
         this.conf();
+        this.router.routes(this.app);
     }
 
     private conf(): void {
