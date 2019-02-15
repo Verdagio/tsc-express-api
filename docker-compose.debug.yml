@@ -12,11 +12,15 @@ services:
     ports:
       - "9000:5000"
     depends_on: 
-      - mongodb
+      - mongo 
+    command: "npm run dev"
 
-  mongodb:
+  mongo:
     image: mongo
     restart: always
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: admin
-      MONGO_INITDB_ROOT_PASSWORD: password
+    ports: 
+      - "27017:27017"
+    volumes: 
+      - db-data
+volumes: 
+  db-data:

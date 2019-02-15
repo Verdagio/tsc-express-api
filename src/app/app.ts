@@ -8,6 +8,7 @@ import * as mongoose from 'mongoose';
 
 import { Router } from '../routes/router'
 
+const MONGO_URL = 'mongodb://mongo/sampledb'
 
 class App {
 
@@ -23,6 +24,7 @@ class App {
         issuer: config.get('Secret.domain'),
         algorithms: config.get('Secret.algorithms')
     });
+    
     public router : Router = new Router();
 
     constructor(){
@@ -39,10 +41,10 @@ class App {
     }
 
     private dbConnect(): void{
-        mongoose.connect('mongodb://localhost/sampledb', { useNewUrlParser: true });
+        mongoose.connect(MONGO_URL, { useNewUrlParser: true });
         const connectionStatus = mongoose.connection;
         connectionStatus.on('connected', ()=>{
-            console.log('successful connection to mongodb');
+            console.log('Connected to mongodb');
         });
     }
 }

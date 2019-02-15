@@ -9,7 +9,6 @@ const User = mongoose.model('User', sampleSchema);
 export class UserCtrl {
     
     public createUser (req: Request, res: Response) {
-        console.log(req);
         let newUser = new User(req.body);
         newUser.save((e: Error, user: object) => {
             if(e){
@@ -47,11 +46,11 @@ export class UserCtrl {
     }// update user by id
 
     public deleteUser (req: Request, res: Response){
-        User.remove({_id: req.params.userId}, (e) => {
+        User.deleteOne({_id: req.params.userId}, (e) => {
             if(e){
                 res.send(e);
             }
-            res.json({message: `Successfully deleted user with id: ${req.params.id}`});
+            res.json({message: `Successfully deleted user with id: ${req.params.userId}`});
         });
     }
 
