@@ -4,13 +4,14 @@ services:
   tsc-express-api:
     build: 
       context: ./
-      dockerfile: Dockerfile-debug
+      dockerfile: Dockerfile
     user: "node"
     working_dir: /home/node/app
     volumes:
       - .:/home/node/app
     ports:
       - "9000:5000"
+      # - "9443:5443"   SSL
     depends_on: 
       - mongo 
     command: "npm run dev"
@@ -18,9 +19,13 @@ services:
   mongo:
     image: mongo
     restart: always
+    # environment:
+    #   MONGO_INITDB_ROOT_USERNAME: admin
+    #   MONGO_INITDB_ROOT_PASSWORD: password
     ports: 
       - "27017:27017"
     volumes: 
-      - db-data
+      - db-data:/sampledb
+
 volumes: 
   db-data:

@@ -1,14 +1,14 @@
-import * as express from 'express';
 import * as bodyParser from 'body-parser';
+import * as config from 'config';
 import * as cors from 'cors';
+import * as express from 'express';
 import * as jwt from 'express-jwt';
 import * as jwks from 'jwks-rsa';
-import * as config from 'config';
 import * as mongoose from 'mongoose';
 
 import { Router } from '../routes/router'
 
-const MONGO_URL = 'mongodb://mongo/sampledb'
+const MONGO_URL = `mongodb://mongo/sampledb`
 
 class App {
 

@@ -4,7 +4,8 @@
   "description": "A simple express API which will serve authentication tokens",
   "main": "lib/index.js",
   "scripts": {
-    "build": "tslint --force --format verbose \"src/**/*.ts\" && tsc",
+    "lint": "tslint --force --format verbose \"src/**/*.ts\"",
+    "build": "npm run lint && tsc",
     "dev": "concurrently -rk \"npm run build -- --watch \" \"cross-env NODE_ENV=development nodemon ./lib/index.js\"",
     "start": "cross-env NODE_ENV=production node ./lib/index.js",
     "prod": "npm run build && npm start"
@@ -18,9 +19,11 @@
   "author": "Daniel Verdejo",
   "license": "UNLICENSED",
   "dependencies": {
+    "@types/chai": "^4.1.7",
     "@types/config": "0.0.34",
     "@types/cors": "^2.8.4",
     "@types/express": "^4.16.0",
+    "@types/mocha": "^5.2.6",
     "@types/mongoose": "^5.3.12",
     "chai": "^4.2.0",
     "concurrently": "^4.1.0",

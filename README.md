@@ -2,6 +2,9 @@
 Boilerplate TypeScript-Express API that implements auth0 and containerization
 
 ## Before you use!
+
+```npm install```
+
 Config is used to grab values from a json file for auth0 and environment values.
 
  1. Create config/ directory
@@ -9,21 +12,24 @@ Config is used to grab values from a json file for auth0 and environment values.
  3. Insert the following:
 
  ```
- {
+{
     "Server": {
         "development": {
+            "httpsPort": 5443,
             "port": 5000,
             "name": "Dev-Express"
         },
         "production": {
+            "httpsPort": 9443,
             "port": 9000,
             "name": "Express"
         },
-        "testing": {
+        "test": {
             "port": 4000,
             "name": "Test-Express"
         },
         "default": {
+            "httpsPort": 5443,
             "port": 5000,
             "name": "Dev-Express"
         }
@@ -34,9 +40,19 @@ Config is used to grab values from a json file for auth0 and environment values.
         "algorithms": [
             "RS256"
         ]
+    },
+    "Mongo": {
+        "user": "admin",
+        "pass": "password"
     }
 }
  ```
+ If using SSL don't forget to add the port bindings to your docker-compose and .pem files to config/ dir!
+
+Use OpenSSL to generate your .pem files:
+
+OpenSSL> req -newkey rsa:2048 -nodes -keyout key.pem -x509 -days 365 -out cert.pem
+
 
  If you do not already have auth0 configured follow these [instructions](https://auth0.com/docs/quickstart/backend/nodejs)
 
@@ -45,9 +61,9 @@ In your command line use any of the following:
 
 New development build : ```docker-compose -f docker-compose.debug.yml up --build```
 
-Rebuild devevelopment : ```docker-compose -f docker-compose.debug.yml up --no-deps```
+Rebuild devevelopment : ```docker-compose -f docker-compose.debug.yml up --build --no-deps```
 
-Run SUT : ```docker-compose -f docker-compose.test.yml up --no-deps```
+Run test suite : ```docker-compose -f docker-compose.test.yml up --no-deps```
 
 Production ready build : ```docker-compose up --build```
 
