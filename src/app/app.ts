@@ -28,8 +28,7 @@ class App {
 
     private dbConnect(): void{
         mongoose.connect(MONGO_URL, { useNewUrlParser: true });
-        const connectionStatus = mongoose.connection;
-        connectionStatus.on('connected', ()=>{
+        mongoose.connection.on('connected', ()=>{
             console.log('Connected to mongodb');
         });
     }

@@ -35,13 +35,15 @@ Config is used to grab values from a json file for auth0 and environment values.
         }
     },
     "Secret": {
-        "audience": "http://your-audience:port",
-        "domain": "yourDomain.eu.auth0.com",
+        "audience": "http://your-audience/",
+        "domain": "https://yourDomain.auth0.com/",
         "algorithms": [
             "RS256"
         ]
     },
     "Mongo": {
+        "host": "mongodb://mongo",
+        "dbname": "sampledb",
         "user": "admin",
         "pass": "password"
     }
