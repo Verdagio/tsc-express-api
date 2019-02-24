@@ -1,19 +1,20 @@
 import * as express from "express";
 
 import { UserCtrl } from '../controllers/sampleCtrl';
+import { authCheck } from '../app/middleware';
 
 export class Router {
     public userController: UserCtrl = new UserCtrl();
     public routes(app : express.Application): void {
 
-        app.route('/user')
+        app.route('/api/user')
             .post(this.userController.createUser)
             .get(this.userController.getUsers);
 
-        app.route('/user/:userId')
+        app.route('/api/user/:userId')
             .get(this.userController.getUser)
-            .put(this.userController.updateUser)
-            .delete(this.userController.deleteUser);
+            .put(authCheck, this.userController.updateUser)
+            .delete(authCheck, this.userController.deleteUser);
         
         
 

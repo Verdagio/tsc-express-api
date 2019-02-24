@@ -2,29 +2,15 @@ import * as bodyParser from 'body-parser';
 import * as config from 'config';
 import * as cors from 'cors';
 import * as express from 'express';
-import * as jwt from 'express-jwt';
-import * as jwks from 'jwks-rsa';
 import * as mongoose from 'mongoose';
 
 import { Router } from '../routes/router'
 
-const MONGO_URL = `mongodb://mongo/sampledb`
+const MONGO_URL = `${config.get('Mongo.host')}/${config.get('Mongo.dbname')}`;
 
 class App {
 
-    public app: express.Application;
-    public authCheck = jwt({
-        secret: jwks.expressJwtSecret({
-            cache: true,
-            rateLimit: true,
-            jwksRequestsPerMinute: 5,
-            jwksUri: `https://${config.get('Secret.domain')}/.well-known/jwks.json`
-        }),
-        audience: config.get('Secret.audience'),
-        issuer: config.get('Secret.domain'),
-        algorithms: config.get('Secret.algorithms')
-    });
-    
+    public app: express.Application;  
     public router : Router = new Router();
 
     constructor(){
