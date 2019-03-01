@@ -15,8 +15,6 @@ export class Router {
             .get(this.userController.getUser)
             .put(authCheck, this.userController.updateUser)
             .delete(authCheck, this.userController.deleteUser);
-        
-        
 
         app.route('/healthcheck')
             .get((req: express.Request, res: express.Response) => {

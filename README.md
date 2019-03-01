@@ -69,7 +69,9 @@ Run test suite : ```docker-compose -f docker-compose.test.yml up --no-deps```
 
 Production ready build : ```docker-compose up --build```
 
-#### Run out of container
+#### Run out of container 
+
+(note Error may occur for mongodb connection if not setup on local machine)
 
 Build: ```npm run build```
 
@@ -80,3 +82,12 @@ Test: ```npm run test```
 Development run : ```npm run dev```
 
 Production run : ```npm run prod```
+
+## Swagger UI Docs
+
+Once your service is up and running go to the following:
+
+```http://localhost:9000/api-docs```
+
+
+
