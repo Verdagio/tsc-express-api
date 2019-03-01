@@ -3,7 +3,6 @@ import * as config from 'config';
 import * as cors from 'cors';
 import * as express from 'express';
 import * as expressOasGenerator from 'express-oas-generator';
-import * as fs from 'fs';
 import * as mongoose from 'mongoose';
 
 import { Router } from '../routes/router'
@@ -20,14 +19,16 @@ class App {
         this.conf();
         this.router.routes(this.app);
         this.dbConnect();
-        expressOasGenerator.init(this.app, (spec: Object) => {
-            let dir = './dist'
-            if(!fs.existsSync(dir)){
-                fs.mkdirSync(dir);
-            }
-            fs.writeFileSync('./dist/swagger.json', JSON.stringify(spec));
-            return spec;
-        });
+        expressOasGenerator.init(this.app, {});
+        // use for a json file to be output
+        // expressOasGenerator.init(this.app, (spec: Object) => {
+        //     let dir = './dist'
+        //     if(!fs.existsSync(dir)){
+        //         fs.mkdirSync(dir);
+        //     }
+        //     fs.writeFileSync('./dist/swagger.json', JSON.stringify(spec));
+        //     return spec;
+        // });
     }
 
     private conf(): void {
