@@ -1,9 +1,5 @@
 import * as request from 'supertest';
-import jasmine from 'jasmine';
 import api from '../../src';
-
-
-// Need to create a spy on mongoose.connect() and return mocked db connection
 
 describe('Healthcheck', () => {
     describe('GET', () => {
