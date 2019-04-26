@@ -1,0 +1,20 @@
+{
+    "Server": {
+        "development": {
+            "port": 5000,
+            "name": "Dev-Express"
+        },
+        "production": {
+            "port": 9000,
+            "name": "Express"
+        },
+        "test": {
+            "port": 4000,
+            "name": "Test-Express"
+        },
+        "default": {
+            "port": 5000,
+            "name": "Dev-Express"
+        }
+    }
+}

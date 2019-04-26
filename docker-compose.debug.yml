@@ -1,5 +1,4 @@
 version: "3"
-
 services:
   tsc-express-api:
     build: 
@@ -11,21 +10,4 @@ services:
       - .:/home/node/app
     ports:
       - "9000:5000"
-      # - "9443:5443"   SSL
-    depends_on: 
-      - mongo 
     command: "npm run dev"
-
-  mongo:
-    image: mongo
-    restart: always
-    # environment:
-    #   MONGO_INITDB_ROOT_USERNAME: admin
-    #   MONGO_INITDB_ROOT_PASSWORD: password
-    # ports: 
-    #   - "27017:27017"
-    volumes: 
-      - db-data:/sampledb
-
-volumes: 
-  db-data:
